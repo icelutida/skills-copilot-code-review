@@ -12,24 +12,44 @@
     />
   </head>
   <body>
- <div class="announcement-banner">
-    📢 As inscrições para atividades estão abertas até o final do mês. Não perca sua vaga!
- </div>
     <header>
-      <h1>Mergington High School</h1>
-      <h2>Atividades Extracurriculares</h2>
-      <div id="user-controls">
-        <div id="user-status">
-          <button id="login-button" class="icon-button">
-            <span class="user-icon">👤</span>
-            <span>Entrar lá</span>
+      <div class="header-top-row">
+        <div class="brand-block">
+          <p class="eyebrow">Vida escolar em movimento</p>
+          <h1>Mergington High School</h1>
+          <h2>Atividades Extracurriculares</h2>
+        </div>
+        <div id="user-controls">
+          <button
+            id="manage-announcements-button"
+            class="header-action-button"
+            type="button"
+            aria-haspopup="dialog"
+            aria-controls="announcements-modal"
+          >
+            Gerenciar anúncios
           </button>
-          <div id="user-info" class="hidden">
-            <span id="display-name"></span>
-            <button id="logout-button">Sair</button>
+          <div id="user-status">
+            <button id="login-button" class="icon-button" type="button">
+              <span class="user-icon">👤</span>
+              <span>Entrar</span>
+            </button>
+            <div id="user-info" class="hidden">
+              <span id="display-name"></span>
+              <button id="logout-button" type="button">Sair</button>
+            </div>
           </div>
         </div>
       </div>
+      <section id="announcement-region" class="announcement-region" aria-live="polite">
+        <div id="announcement-banner" class="announcement-banner is-loading">
+          <div class="announcement-banner-header">
+            <span class="announcement-kicker">Comunicados</span>
+            <p id="announcement-summary">Carregando anuncios da escola...</p>
+          </div>
+          <div id="announcement-items" class="announcement-items"></div>
+        </div>
+      </section>
     </header>
 
     <main>
@@ -134,6 +154,70 @@
           <button type="submit">Entrar</button>
         </form>
         <div id="login-message" class="hidden message"></div>
+      </div>
+    </div>
+
+    <!-- Announcement Management Modal -->
+    <div id="announcements-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-content announcements-modal-content">
+        <span class="close-announcements-modal" role="button" tabindex="0" aria-label="Fechar gerenciamento de anuncios">&times;</span>
+        <div class="announcements-modal-layout">
+          <section class="announcements-panel">
+            <div class="panel-heading">
+              <p class="panel-kicker">Painel editorial</p>
+              <h3>Anúncios publicados</h3>
+              <p>Revise vigência, destaque e contexto antes de salvar mudanças.</p>
+            </div>
+            <div id="announcements-manager-message" class="hidden message"></div>
+            <div id="announcements-list" class="announcements-list"></div>
+          </section>
+          <section class="announcements-panel announcements-editor-panel">
+            <div class="panel-heading">
+              <p class="panel-kicker">Composer</p>
+              <h3 id="announcement-form-title">Novo anúncio</h3>
+              <p>Mensagem clara, vigência obrigatória e publicação controlada.</p>
+            </div>
+            <form id="announcement-form" class="announcement-form">
+              <input type="hidden" id="announcement-id" />
+              <div class="form-group">
+                <label for="announcement-title">Título</label>
+                <input
+                  type="text"
+                  id="announcement-title"
+                  maxlength="80"
+                  required
+                  placeholder="Ex.: Prazo final para inscrições de inverno"
+                />
+              </div>
+              <div class="form-group">
+                <label for="announcement-message">Mensagem</label>
+                <textarea
+                  id="announcement-message"
+                  rows="5"
+                  maxlength="280"
+                  required
+                  placeholder="Compartilhe o recado que deve aparecer para toda a comunidade escolar."
+                ></textarea>
+              </div>
+              <div class="form-row two-columns">
+                <div class="form-group">
+                  <label for="announcement-start-date">Início</label>
+                  <input type="date" id="announcement-start-date" />
+                  <small>Opcional. Se vazio, o anúncio entra no ar imediatamente.</small>
+                </div>
+                <div class="form-group">
+                  <label for="announcement-expiration-date">Expiração</label>
+                  <input type="date" id="announcement-expiration-date" required />
+                  <small>Obrigatório. Após essa data o anúncio deixa de aparecer no site.</small>
+                </div>
+              </div>
+              <div class="announcement-form-actions">
+                <button type="submit" id="announcement-save-button">Publicar anúncio</button>
+                <button type="button" id="announcement-reset-button" class="secondary-button">Limpar</button>
+              </div>
+            </form>
+          </section>
+        </div>
       </div>
     </div>
 
