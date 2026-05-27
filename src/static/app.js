@@ -152,16 +152,31 @@ document.addEventListener("DOMContentLoaded", () => {
     activeAnnouncements.forEach((announcement) => {
       const announcementCard = document.createElement("article");
       announcementCard.className = "announcement-card";
-      announcementCard.innerHTML = `
-        <div class="announcement-card-meta">
-          <span class="announcement-chip">Ativo</span>
-          <span>Expira em ${formatAnnouncementDate(
-            announcement.expiration_date
-          )}</span>
-        </div>
-        <h3>${announcement.title}</h3>
-        <p>${announcement.message}</p>
-      `;
+
+      const announcementMeta = document.createElement("div");
+      announcementMeta.className = "announcement-card-meta";
+
+      const activeChip = document.createElement("span");
+      activeChip.className = "announcement-chip";
+      activeChip.textContent = "Ativo";
+
+      const expirationText = document.createElement("span");
+      expirationText.textContent = `Expira em ${formatAnnouncementDate(
+        announcement.expiration_date
+      )}`;
+
+      announcementMeta.appendChild(activeChip);
+      announcementMeta.appendChild(expirationText);
+
+      const announcementTitle = document.createElement("h3");
+      announcementTitle.textContent = announcement.title;
+
+      const announcementMessage = document.createElement("p");
+      announcementMessage.textContent = announcement.message;
+
+      announcementCard.appendChild(announcementMeta);
+      announcementCard.appendChild(announcementTitle);
+      announcementCard.appendChild(announcementMessage);
       announcementItems.appendChild(announcementCard);
     });
   }
