@@ -4,6 +4,7 @@ Announcement endpoints for the High School Management System API.
 
 from datetime import date
 from typing import Any, Dict, List, Optional
+from uuid import uuid4
 
 from fastapi import APIRouter, Body, HTTPException, Query
 from pydantic import BaseModel, Field
@@ -124,7 +125,7 @@ def create_announcement(
     teacher = get_authenticated_teacher(teacher_username)
     validated_payload = validate_payload(payload)
 
-    next_id = f"announcement-{announcements_collection.count_documents({}) + 1}"
+    next_id = f"announcement-{uuid4().hex}"
     announcement = {
         "id": next_id,
         "title": validated_payload.title.strip(),
