@@ -53,4 +53,4 @@ A aplicação usa um modelo de dados simples com identificadores significativos:
    - Nome
    - Série
 
-Os dados são persistidos no MongoDB local configurado em [src/backend/database.py](c:/Workspace/skills-copilot-code-review/src/backend/database.py).
+Os dados são persistidos no MongoDB local configurado em [src/backend/database.py](backend/database.py).
