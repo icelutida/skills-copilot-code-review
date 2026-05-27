@@ -6,13 +6,15 @@ Uma aplicação FastAPI super simples que permite aos alunos visualizar e se ins
 
 - Visualizar todas as atividades extracurriculares disponíveis
 - Inscrever-se em atividades
+- Exibir anúncios dinâmicos carregados do MongoDB
+- Permitir que professores autenticados gerenciem anúncios
 
 ## Como começar
 
 1. Instale as dependências:
 
    ```
-   pip install fastapi uvicorn
+   pip install -r requirements.txt
    ```
 
 2. Execute a aplicação:
@@ -31,6 +33,11 @@ Uma aplicação FastAPI super simples que permite aos alunos visualizar e se ins
 | ------ | ----------------------------------------------------------------- | -------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Obtém todas as atividades com detalhes e número atual de participantes |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Inscreve-se em uma atividade                                         |
+| GET    | `/announcements`                                                  | Retorna os anúncios ativos exibidos no cabeçalho                     |
+| GET    | `/announcements/manage?teacher_username=principal`                | Retorna todos os anúncios para a tela de gerenciamento               |
+| POST   | `/announcements?teacher_username=principal`                       | Cria um anúncio com `title`, `message`, `expiration_date` e `start_date` opcional |
+| PUT    | `/announcements/{announcement_id}?teacher_username=principal`     | Atualiza um anúncio existente                                        |
+| DELETE | `/announcements/{announcement_id}?teacher_username=principal`     | Exclui um anúncio existente                                          |
 
 ## Modelo de Dados
 
@@ -46,4 +53,4 @@ A aplicação usa um modelo de dados simples com identificadores significativos:
    - Nome
    - Série
 
-Todos os dados são armazenados em memória, o que significa que serão resetados quando o servidor for reiniciado.
+Os dados são persistidos no MongoDB local configurado em [src/backend/database.py](backend/database.py).
