@@ -159,13 +159,18 @@
 
     <!-- Announcement Management Modal -->
     <div id="announcements-modal" class="modal hidden" aria-hidden="true">
-      <div class="modal-content announcements-modal-content">
+      <div
+        class="modal-content announcements-modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="announcements-modal-title"
+      >
         <span class="close-announcements-modal" role="button" tabindex="0" aria-label="Fechar gerenciamento de anuncios">&times;</span>
         <div class="announcements-modal-layout">
           <section class="announcements-panel">
             <div class="panel-heading">
               <p class="panel-kicker">Painel editorial</p>
-              <h3>Anúncios publicados</h3>
+              <h3 id="announcements-modal-title">Anúncios publicados</h3>
               <p>Revise vigência, destaque e contexto antes de salvar mudanças.</p>
             </div>
             <div id="announcements-manager-message" class="hidden message"></div>
